@@ -3,9 +3,11 @@ import { signal } from '@angular/core';
 import { Produto } from '../produto/produto';
 import { computed } from '@angular/core';
 import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
+import { effect } from '@angular/core';
+import { UpperCasePipe } from '@angular/common';
 @Component({
   selector: 'app-list-produtos',
-  imports: [Produto, PrecoFormatadoPipe],
+  imports: [Produto, PrecoFormatadoPipe, UpperCasePipe],
   templateUrl: './list-produtos.html',
   styleUrl: './list-produtos.css',
 })
@@ -18,7 +20,8 @@ export class ListProdutos {
     {nome: 'Headset', preco:99.59}
   ]);
 exibirProduto(nome:string){
-  console.log('Produto selecionado: ', nome);
+  //console.log('Produto selecionado: ', nome);
+  this.produtoSelecionado.set(nome);
 }
  adicionarProduto(){
   this.produtos.update(listaAtual => [
@@ -38,4 +41,18 @@ substituirProdutos(){
     {nome:'Arroz Fazenda', preco:400},
   ]);
 }
+ constructor(){
+  effect(() =>{
+    console.log('Lista de produtos alterados: ', this.produtos());
+  });
+  effect(() =>{
+     console.log('Valor total atualizado: ', this.valorTotal());
+  });
+  effect(() => {
+    if (typeof document!== 'undefined') {
+        document.title = `(${this.totalProdutos()}) Minha Loja`;
+}
+  });
+ }
+ produtoSelecionado = signal <string | null> (null);
 }
