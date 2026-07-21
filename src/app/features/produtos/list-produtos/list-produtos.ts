@@ -13,11 +13,11 @@ import { UpperCasePipe } from '@angular/common';
 })
 export class ListProdutos {
   produtos = signal([
-    {nome: 'Teclado', preco:89.98},
-    {nome: 'Mouse Gamer', preco:78.90},
-    {nome: 'Monitor', preco:849.99},
-    {nome: 'Mesa', preco:450.59},
-    {nome: 'Headset', preco:99.59}
+    {nome: 'Teclado Gamer', preco:149.00},
+    {nome: 'Mouse Gamer', preco:299.99},
+    {nome: 'Monitor Gamer', preco:1599.99},
+    {nome: 'Desktop Gamer', preco:4999.99},
+    {nome: 'Headset Gamer', preco:699.99}
   ]);
 exibirProduto(nome:string){
   //console.log('Produto selecionado: ', nome);
@@ -26,8 +26,7 @@ exibirProduto(nome:string){
  adicionarProduto(){
   this.produtos.update(listaAtual => [
     ...listaAtual,
-     {nome:'Polystation', preco:1000},
-     {nome:'Playstation', preco:599}
+     {nome:'Processador Core i5 14550FS', preco:2500},
 
   ]);
 
@@ -38,7 +37,11 @@ valorTotal = computed(() => { return this.produtos().reduce((total, item) => tot
 
 substituirProdutos(){
   this.produtos.set([
-    {nome:'Arroz Fazenda', preco:400},
+    {nome:'Teclado', preco:40},
+    {nome:'Mouse', preco:10},
+    {nome:'Monitor', preco:100},
+    {nome:'Desktop', preco:500},
+    {nome:'Headset', preco:25}
   ]);
 }
  constructor(){
@@ -55,4 +58,16 @@ substituirProdutos(){
   });
  }
  produtoSelecionado = signal <string | null> (null);
-}
+ carrinho = signal <{ nome: string; preco: number}[]>([]);
+ adicionarAoCarrinho(produto: {nome: string; preco: number}){
+  this.carrinho.update(listaAtual => [
+    ...listaAtual,produto
+  ]);
+
+  }
+  quantidadeCarrinho = computed(() => this.carrinho().length);
+  totalCarrinho = computed(() => { 
+    return this.carrinho().reduce((total, item) =>
+       total + item.preco,0);
+  });
+ }
