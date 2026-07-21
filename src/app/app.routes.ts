@@ -1,11 +1,44 @@
+// // import { Routes } from '@angular/router';
+// // //import { ListProdutos } from './features/produtos/list-produtos/list-produtos'; import legado
+// // import { Carrinho } from './features/carrinho/carrinho/carrinho';
+// // import { Home } from './features/home/home/home';
+// // export const routes: Routes = [
+// //   { 
+// //     path: '', component: Home,
+// // },
+// // //Código legado com LazyLoading
+// // //   { 
+// // //     path: 'produtos', component: ListProdutos,
+// // // },
+
+// // {
+// //   path: 'produtos',
+// //   loadComponent: () =>
+// //     import('./features/produtos/list-produtos/list-produtos').then(m => m.ListProdutos)
+// // },
+// // {
+// //   path: 'carrinho', component: Carrinho,
+// // },
+// // ];
+//! codigo Final com LazyLoading e LoadComponent
 import { Routes } from '@angular/router';
-import { ListProdutos } from './features/produtos/list-produtos/list-produtos';
-import { Carrinho } from './features/carrinho/carrinho/carrinho';
 export const routes: Routes = [
-  { 
-    path: '', component: ListProdutos 
-},
-  { 
-    path: 'carrinho', component: Carrinho 
-}
+  {
+    path: '',
+    loadComponent: () => 
+      import('./features/home/home/home').then((m) => m.Home),
+  },
+ { path: 'produtos',
+   loadComponent: () =>
+    import('./features/produtos/list-produtos/list-produtos').then((m) => m.ListProdutos),
+  },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./features/carrinho/carrinho/carrinho').then((m) => m.Carrinho),
+  },
+  {
+    path:'**',
+    redirectTo: '',
+  },
 ];
