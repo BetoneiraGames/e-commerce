@@ -1,4 +1,10 @@
-<!--Remove o templete padrão do angular cli-->
-<!--Adiciona o componente para as informações-->
-<h1>Minha Loja Virtual</h1>
-<app-list-produtos></app-list-produtos>
+<!--  Cabeçalho: nome fictício com variável {{nomeLoja}}-->
+  <!-- Para alterar o nome da Loja localizar na class App variável nomeLoja -->
+<h1>{{ nomeLoja }}</h1>
+<!--  Barra de Navegação, adicionar as rotas -->
+<nav>
+    <a routerLink="/">Produtos</a>
+    <a routerLink="/carrinho">Carrinho</a>
+</nav>
+<hr />
+<router-outlet></router-outlet>
