@@ -16,6 +16,7 @@
     [preco] = "item.preco"
     (produtoSelecionado) = exibirProduto($event)
     ></app-produto>
+    <button (click)="adicionarAoCarrinho(item)">Adicionar ao carrinho</button>
 }
 <p>
     <button (click)="adicionarProduto()">Adicionar Produto</button>
@@ -25,3 +26,10 @@
 <P>
     <button (click)="substituirProdutos()">Substituir Produto</button>
 </P>
+<hr>
+<h2>Carrinho</h2>
+@for (item of carrinho(); track $index){
+    <p>{{ item.nome | uppercase}} - {{ item.preco | precoFormatado }}</p>
+}
+<p><strong>Itens no carrinho: {{ quantidadeCarrinho() }}</strong></p>
+<p><strong>Total no carrinho: {{ totalCarrinho() | precoFormatado }}</strong></p>
