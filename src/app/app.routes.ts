@@ -33,7 +33,7 @@ export const routes: Routes = [
     import('./features/produtos/list-produtos/list-produtos').then((m) => m.ListProdutos),
   },
   {
-    path: '',
+    path: 'carrinho',
     loadComponent: () =>
       import('./features/carrinho/carrinho/carrinho').then((m) => m.Carrinho),
   },
