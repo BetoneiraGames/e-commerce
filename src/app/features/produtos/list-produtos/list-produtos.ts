@@ -63,7 +63,6 @@ substituirProdutos(){
   this.carrinho.update(listaAtual => [
     ...listaAtual,produto
   ]);
-
   }
   quantidadeCarrinho = computed(() => this.carrinho().length);
   totalCarrinho = computed(() => { 
